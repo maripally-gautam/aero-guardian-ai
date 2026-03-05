@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bell, Search } from "lucide-react";
 import FlyingAirplanes from "@/components/FlyingAirplanes";
 import AuroraBackground from "@/components/AuroraBackground";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export function DashboardLayout({ children }: { children: ReactNode }) {
   const { user } = useAuth();
@@ -18,7 +19,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
         <FlyingAirplanes />
 
         <AppSidebar />
-        <div className="flex-1 flex flex-col min-w-0 relative z-[1]">
+        <div className="flex-1 flex flex-col min-w-0 relative z-[5]">
           <header className="h-16 flex items-center justify-between border-b border-border/50 px-6 glass-strong z-10">
             <div className="flex items-center gap-4">
               <SidebarTrigger className="text-muted-foreground hover:text-foreground transition-colors" />
@@ -27,11 +28,17 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
                 <span className="font-heading text-xs">Search systems...</span>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              {/* Notification Bell */}
               <button className="relative p-2 rounded-lg hover:bg-secondary/50 transition-colors text-muted-foreground hover:text-foreground">
                 <Bell className="h-4 w-4" />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary animate-pulse-glow" />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary animate-pulse" />
               </button>
+
+              {/* Theme Toggle - between bell and avatar */}
+              <ThemeToggle />
+
+              {/* User Avatar */}
               <div className="flex items-center gap-3">
                 <div className="text-right hidden sm:block">
                   <p className="text-sm font-heading font-medium text-foreground">{user?.name}</p>

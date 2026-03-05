@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 interface FlyingPlane {
     id: number;
@@ -11,25 +11,48 @@ interface FlyingPlane {
     yOffset: number;
 }
 
+const AirplaneSVG = ({ size, direction }: { size: number; direction: "ltr" | "rtl" }) => (
+    <svg
+        width={size}
+        height={size}
+        viewBox="0 0 64 64"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{
+            transform: direction === "rtl" ? "scaleX(-1)" : "none",
+        }}
+    >
+        {/* Fuselage */}
+        <ellipse cx="32" cy="32" rx="28" ry="4" fill="currentColor" opacity="0.7" />
+        {/* Nose cone */}
+        <path d="M60 32 L64 31 L64 33 Z" fill="currentColor" opacity="0.8" />
+        {/* Wings */}
+        <path d="M24 28 L32 12 L36 12 L32 28 Z" fill="currentColor" opacity="0.6" />
+        <path d="M24 36 L32 52 L36 52 L32 36 Z" fill="currentColor" opacity="0.6" />
+        {/* Tail fin vertical */}
+        <path d="M6 32 L4 20 L8 20 L10 32 Z" fill="currentColor" opacity="0.55" />
+        {/* Tail fin horizontal */}
+        <path d="M6 30 L10 24 L12 24 L10 30 Z" fill="currentColor" opacity="0.45" />
+        <path d="M6 34 L10 40 L12 40 L10 34 Z" fill="currentColor" opacity="0.45" />
+        {/* Engine pods */}
+        <ellipse cx="28" cy="22" rx="3" ry="1.5" fill="currentColor" opacity="0.5" />
+        <ellipse cx="28" cy="42" rx="3" ry="1.5" fill="currentColor" opacity="0.5" />
+    </svg>
+);
+
 const FlyingAirplanes = () => {
-    const [planes, setPlanes] = useState<FlyingPlane[]>([]);
-
-    useEffect(() => {
-        const generatePlanes = (): FlyingPlane[] => {
-            const count = 6;
-            return Array.from({ length: count }, (_, i) => ({
-                id: i,
-                top: 8 + Math.random() * 80,
-                duration: 18 + Math.random() * 22,
-                delay: i * 4 + Math.random() * 5,
-                size: 16 + Math.random() * 20,
-                opacity: 0.06 + Math.random() * 0.1,
-                direction: (i % 2 === 0 ? "ltr" : "rtl") as "ltr" | "rtl",
-                yOffset: -15 + Math.random() * 30,
-            }));
-        };
-
-        setPlanes(generatePlanes());
+    const planes = useMemo<FlyingPlane[]>(() => {
+        const count = 6;
+        return Array.from({ length: count }, (_, i) => ({
+            id: i,
+            top: 5 + Math.random() * 85,
+            duration: 14 + Math.random() * 20,
+            delay: Math.random() * 15,
+            size: 28 + Math.random() * 20,
+            opacity: 0.12 + Math.random() * 0.16,
+            direction: (Math.random() > 0.5 ? "ltr" : "rtl") as "ltr" | "rtl",
+            yOffset: -25 + Math.random() * 50,
+        }));
     }, []);
 
     return (
@@ -46,32 +69,19 @@ const FlyingAirplanes = () => {
                         "--y-offset": `${plane.yOffset}px`,
                     } as React.CSSProperties}
                 >
-                    <svg
-                        width={plane.size}
-                        height={plane.size}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        style={{
-                            transform: plane.direction === "rtl" ? "scaleX(-1)" : "none",
-                        }}
-                    >
-                        <path
-                            d="M21.5 14.0002L13 17.5002V21.0002L10.5 19.0002L8 21.0002V17.5002L2.5 14.0002L8 11.5002V4.50024C8 3.83724 8.26 3.23724 8.75 2.75024C9.24 2.26024 9.84 2.00024 10.5 2.00024C11.16 2.00024 11.76 2.26024 12.25 2.75024C12.74 3.24024 13 3.84024 13 4.50024V11.5002L21.5 14.0002Z"
-                            fill="currentColor"
-                            className="text-primary"
-                        />
-                    </svg>
+                    <div className="text-primary">
+                        <AirplaneSVG size={plane.size} direction={plane.direction} />
+                    </div>
                 </div>
             ))}
 
-            {/* Contrails / vapor trails */}
+            {/* Contrails */}
             {planes.slice(0, 3).map((plane) => (
                 <div
                     key={`trail-${plane.id}`}
                     className={`flying-contrail ${plane.direction}`}
                     style={{
-                        top: `${plane.top + 0.5}%`,
+                        top: `${plane.top + 0.3}%`,
                         animationDuration: `${plane.duration}s`,
                         animationDelay: `${plane.delay + 0.3}s`,
                         opacity: plane.opacity * 0.4,

@@ -1,16 +1,19 @@
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Plane, Shield, Zap, Brain, Loader2 } from "lucide-react";
+import { Plane, Shield, Zap, Brain, Loader2, Sun, Moon } from "lucide-react";
 import FlyingAirplanes from "@/components/FlyingAirplanes";
 import AuroraBackground from "@/components/AuroraBackground";
 import { useState } from "react";
 
 const LoginPage = () => {
   const { login } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [signingIn, setSigningIn] = useState(false);
+  const isDark = theme === "dark";
 
   const handleLogin = async () => {
     setSigningIn(true);
@@ -25,61 +28,62 @@ const LoginPage = () => {
   };
 
   const features = [
-    { icon: Brain, label: "RAG-Powered AI", color: "text-purple-400" },
-    { icon: Shield, label: "Fault Detection", color: "text-cyan-400" },
-    { icon: Zap, label: "Real-time Analysis", color: "text-amber-400" },
+    { icon: Brain, label: "RAG-Powered AI" },
+    { icon: Shield, label: "Fault Detection" },
+    { icon: Zap, label: "Real-time Analysis" },
   ];
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden noise-bg">
-      {/* Colorful aurora background */}
       <AuroraBackground />
-
-      {/* Flying airplanes */}
       <FlyingAirplanes />
-
-      {/* Ambient gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] rounded-full"
-          style={{ background: "radial-gradient(circle, hsl(250 85% 65% / 0.12) 0%, transparent 70%)" }}
-          animate={{ scale: [1, 1.15, 1], rotate: [0, 45, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        />
-        <motion.div
-          className="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] rounded-full"
-          style={{ background: "radial-gradient(circle, hsl(200 80% 55% / 0.1) 0%, transparent 70%)" }}
-          animate={{ scale: [1.15, 1, 1.15], rotate: [0, -30, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        />
-        <motion.div
-          className="absolute top-1/3 right-1/4 w-[400px] h-[400px] rounded-full"
-          style={{ background: "radial-gradient(circle, hsl(330 90% 60% / 0.06) 0%, transparent 60%)" }}
-          animate={{ scale: [1, 1.3, 1] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-        />
-      </div>
 
       {/* Grid overlay */}
       <div className="absolute inset-0 grid-bg pointer-events-none" />
 
-      {/* Large floating aircraft silhouettes */}
+      {/* Theme toggle at top right */}
+      <motion.button
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2 }}
+        onClick={toggleTheme}
+        className="fixed top-6 right-6 z-50 w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-500 hover:scale-110"
+        style={{
+          background: isDark
+            ? "linear-gradient(135deg, hsl(220 12% 16%), hsl(220 14% 20%))"
+            : "linear-gradient(135deg, hsl(40 100% 92%), hsl(35 100% 85%))",
+          border: isDark
+            ? "1px solid hsl(42 75% 55% / 0.25)"
+            : "1px solid hsl(160 60% 38% / 0.25)",
+        }}
+      >
+        <motion.div
+          key={theme}
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        >
+          {isDark ? <Moon className="h-5 w-5 text-amber-400" /> : <Sun className="h-5 w-5 text-emerald-600" />}
+        </motion.div>
+      </motion.button>
+
+      {/* Large floating aircraft */}
       <motion.div
-        className="absolute top-16 right-24 text-primary/10"
+        className="absolute top-16 right-24 text-primary/15"
         animate={{ y: [-15, 15, -15], rotate: [-5, 5, -5] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       >
         <Plane className="w-40 h-40" />
       </motion.div>
       <motion.div
-        className="absolute bottom-24 left-12 text-accent/8"
+        className="absolute bottom-24 left-12 text-primary/10"
         animate={{ y: [12, -12, 12], x: [-8, 8, -8] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       >
         <Plane className="w-24 h-24 rotate-[30deg]" />
       </motion.div>
       <motion.div
-        className="absolute top-1/3 left-8 text-purple-500/5"
+        className="absolute top-1/3 left-8 text-accent/8"
         animate={{ y: [-20, 20, -20], rotate: [10, -10, 10] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -92,14 +96,9 @@ const LoginPage = () => {
           key={i}
           className="sparkle-dot"
           style={{
-            top: `${15 + Math.random() * 70}%`,
-            left: `${10 + Math.random() * 80}%`,
-            animationDelay: `${i * 0.5}s`,
-            background: i % 3 === 0
-              ? "hsl(250 85% 65%)"
-              : i % 3 === 1
-                ? "hsl(200 80% 55%)"
-                : "hsl(330 90% 60%)",
+            top: `${15 + (i * 9)}%`,
+            left: `${10 + (i * 10) + 5}%`,
+            animationDelay: `${i * 0.4}s`,
           }}
         />
       ))}
@@ -112,13 +111,6 @@ const LoginPage = () => {
         className="relative z-10 w-full max-w-lg mx-4"
       >
         <div className="premium-card p-10 text-center">
-          {/* Animated gradient border glow */}
-          <div className="absolute inset-0 rounded-xl opacity-50 blur-xl -z-10"
-            style={{
-              background: "linear-gradient(135deg, hsl(250 85% 65% / 0.15), hsl(200 80% 55% / 0.1), hsl(330 90% 60% / 0.1))",
-            }}
-          />
-
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
@@ -126,7 +118,6 @@ const LoginPage = () => {
             className="w-20 h-20 mx-auto mb-8 rounded-2xl gradient-primary flex items-center justify-center glow-primary relative"
           >
             <Plane className="w-10 h-10 text-primary-foreground" />
-            {/* Pulse ring */}
             <div className="absolute inset-0 rounded-2xl border-2 border-primary/30 pulse-ring" />
           </motion.div>
 
@@ -164,7 +155,7 @@ const LoginPage = () => {
                 whileHover={{ scale: 1.05, y: -2 }}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary/50 border border-border/50 text-xs font-heading text-muted-foreground hover:border-primary/30 transition-all duration-300"
               >
-                <feat.icon className={`h-3.5 w-3.5 ${feat.color}`} />
+                <feat.icon className="h-3.5 w-3.5 text-primary" />
                 {feat.label}
               </motion.div>
             ))}

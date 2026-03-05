@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { AppProvider } from "@/contexts/AppContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import AircraftPage from "./pages/AircraftPage";
@@ -20,7 +21,7 @@ const queryClient = new QueryClient();
 const LoadingScreen = () => (
   <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
     <div className="absolute inset-0" style={{
-      background: "radial-gradient(ellipse at 50% 50%, hsl(250 85% 65% / 0.05) 0%, transparent 70%)"
+      background: "radial-gradient(ellipse at 50% 50%, hsl(var(--glow-primary) / 0.05) 0%, transparent 70%)"
     }} />
     <div className="text-center space-y-6 relative z-10">
       <div className="w-20 h-20 mx-auto rounded-2xl gradient-primary flex items-center justify-center glow-primary">
@@ -43,7 +44,6 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
 const AppRoutes = () => {
   const { user, loading } = useAuth();
-
   if (loading) return <LoadingScreen />;
 
   return (
@@ -61,19 +61,21 @@ const AppRoutes = () => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <AuthProvider>
-        <AppProvider>
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
-        </AppProvider>
-      </AuthProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <AuthProvider>
+          <AppProvider>
+            <BrowserRouter>
+              <AppRoutes />
+            </BrowserRouter>
+          </AppProvider>
+        </AuthProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </ThemeProvider>
 );
 
 export default App;

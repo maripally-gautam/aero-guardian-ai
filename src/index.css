@@ -5,66 +5,134 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 230 25% 7%;
-    --foreground: 220 20% 95%;
 
-    --card: 230 25% 10%;
-    --card-foreground: 220 20% 95%;
+  /* ========================================
+     DARK THEME — SILVER & GOLD
+     ======================================== */
+  :root,
+  .dark {
+    --background: 220 15% 8%;
+    --foreground: 40 10% 90%;
 
-    --popover: 230 25% 10%;
-    --popover-foreground: 220 20% 95%;
+    --card: 220 14% 11%;
+    --card-foreground: 40 10% 90%;
 
-    --primary: 250 85% 65%;
-    --primary-foreground: 0 0% 100%;
+    --popover: 220 14% 11%;
+    --popover-foreground: 40 10% 90%;
 
-    --secondary: 230 30% 16%;
-    --secondary-foreground: 220 20% 90%;
+    /* Gold primary */
+    --primary: 42 75% 55%;
+    --primary-foreground: 220 15% 8%;
 
-    --muted: 230 20% 14%;
-    --muted-foreground: 225 15% 50%;
+    --secondary: 220 12% 16%;
+    --secondary-foreground: 40 8% 80%;
 
-    --accent: 200 80% 55%;
-    --accent-foreground: 0 0% 100%;
+    --muted: 220 10% 14%;
+    --muted-foreground: 220 8% 50%;
+
+    /* Silver accent */
+    --accent: 220 15% 70%;
+    --accent-foreground: 220 15% 8%;
 
     --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 230 20% 16%;
-    --input: 230 20% 16%;
-    --ring: 250 85% 65%;
+    --border: 220 12% 18%;
+    --input: 220 12% 16%;
+    --ring: 42 75% 55%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 230 25% 8%;
-    --sidebar-foreground: 225 15% 65%;
-    --sidebar-primary: 250 85% 65%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 230 25% 14%;
-    --sidebar-accent-foreground: 220 20% 95%;
-    --sidebar-border: 230 20% 14%;
-    --sidebar-ring: 250 85% 65%;
+    --sidebar-background: 220 15% 9%;
+    --sidebar-foreground: 220 8% 55%;
+    --sidebar-primary: 42 75% 55%;
+    --sidebar-primary-foreground: 220 15% 8%;
+    --sidebar-accent: 220 14% 14%;
+    --sidebar-accent-foreground: 40 10% 90%;
+    --sidebar-border: 220 12% 14%;
+    --sidebar-ring: 42 75% 55%;
 
-    --success: 160 70% 45%;
+    --success: 155 65% 45%;
     --success-foreground: 0 0% 100%;
-    --warning: 42 95% 55%;
+    --warning: 38 92% 55%;
     --warning-foreground: 0 0% 10%;
 
-    --glow-primary: 250 85% 65%;
-    --glow-accent: 200 80% 55%;
-    --gradient-start: 250 85% 65%;
-    --gradient-end: 200 80% 55%;
+    --glow-primary: 42 75% 55%;
+    --glow-accent: 220 15% 70%;
+    --gradient-start: 42 75% 55%;
+    --gradient-end: 32 85% 45%;
 
-    /* Additional vibrant colors */
-    --neon-pink: 330 90% 60%;
-    --neon-green: 160 95% 50%;
-    --neon-orange: 25 100% 60%;
-    --neon-cyan: 185 90% 55%;
+    --chart-grid: 220 12% 16%;
+    --chart-text: 220 8% 50%;
+    --chart-bar-1-start: #C9A84C;
+    --chart-bar-1-end: #8B6914;
+    --chart-line: #A8B2C1;
+
+    color-scheme: dark;
   }
 
-  .dark {
-    --background: 230 25% 7%;
-    --foreground: 220 20% 95%;
+  /* ========================================
+     LIGHT THEME — WARM IVORY & EMERALD
+     ======================================== */
+  .light {
+    --background: 40 30% 96%;
+    --foreground: 220 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 15%;
+
+    /* Emerald primary */
+    --primary: 160 60% 38%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 40 20% 92%;
+    --secondary-foreground: 220 20% 30%;
+
+    --muted: 40 15% 93%;
+    --muted-foreground: 220 10% 45%;
+
+    /* Warm copper accent */
+    --accent: 25 75% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 40 15% 88%;
+    --input: 40 15% 88%;
+    --ring: 160 60% 38%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 40 25% 97%;
+    --sidebar-foreground: 220 10% 45%;
+    --sidebar-primary: 160 60% 38%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 40 20% 93%;
+    --sidebar-accent-foreground: 220 25% 15%;
+    --sidebar-border: 40 15% 90%;
+    --sidebar-ring: 160 60% 38%;
+
+    --success: 155 65% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 10%;
+
+    --glow-primary: 160 60% 38%;
+    --glow-accent: 25 75% 50%;
+    --gradient-start: 160 60% 38%;
+    --gradient-end: 170 65% 30%;
+
+    --chart-grid: 40 15% 88%;
+    --chart-text: 220 10% 45%;
+    --chart-bar-1-start: #2D9C6F;
+    --chart-bar-1-end: #1A6B4A;
+    --chart-line: #C0703A;
+
+    color-scheme: light;
   }
 }
 
@@ -76,6 +144,7 @@
   body {
     @apply bg-background text-foreground font-body antialiased;
     overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.3s ease;
   }
 }
 
@@ -104,14 +173,6 @@
     box-shadow: 0 0 20px hsl(var(--glow-accent) / 0.3), 0 0 60px hsl(var(--glow-accent) / 0.1);
   }
 
-  .glow-cyan {
-    @apply glow-primary;
-  }
-
-  .glow-cyan-sm {
-    @apply glow-primary-sm;
-  }
-
   .glow-text {
     text-shadow: 0 0 12px hsl(var(--glow-primary) / 0.5), 0 0 40px hsl(var(--glow-primary) / 0.15);
   }
@@ -127,40 +188,35 @@
     background-clip: text;
   }
 
-  /* Multi-color gradient text */
   .gradient-text-rainbow {
-    background: linear-gradient(135deg, hsl(250 85% 65%), hsl(200 80% 55%), hsl(160 95% 50%), hsl(330 90% 60%));
-    background-size: 300% 300%;
-    animation: gradient-shift 6s ease infinite;
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--glow-accent)), hsl(var(--gradient-end)));
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .glass {
-    background: hsl(var(--card) / 0.5);
+    background: hsl(var(--card) / 0.6);
     backdrop-filter: blur(16px);
     border: 1px solid hsl(var(--border) / 0.5);
+    transition: background-color 0.5s ease, border-color 0.3s ease;
   }
 
   .glass-strong {
-    background: hsl(var(--card) / 0.8);
+    background: hsl(var(--card) / 0.85);
     backdrop-filter: blur(24px);
     border: 1px solid hsl(var(--border) / 0.6);
-  }
-
-  .glass-premium {
-    background: linear-gradient(135deg, hsl(var(--card) / 0.6), hsl(var(--card) / 0.3));
-    backdrop-filter: blur(20px);
-    border: 1px solid hsl(var(--border) / 0.4);
+    transition: background-color 0.5s ease, border-color 0.3s ease;
   }
 
   .grid-bg {
     background-image:
       radial-gradient(ellipse at 20% 50%, hsl(var(--glow-primary) / 0.03) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 20%, hsl(var(--glow-accent) / 0.03) 0%, transparent 50%),
-      linear-gradient(hsl(var(--border) / 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--border) / 0.08) 1px, transparent 1px);
+      linear-gradient(hsl(var(--border) / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.06) 1px, transparent 1px);
     background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
   }
 
@@ -172,7 +228,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    opacity: 0.015;
+    opacity: 0.012;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
@@ -190,7 +246,7 @@
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, hsl(var(--glow-primary) / 0.2), transparent 40%, transparent 60%, hsl(var(--glow-accent) / 0.2));
+    background: linear-gradient(135deg, hsl(var(--glow-primary) / 0.2), transparent 40%, transparent 60%, hsl(var(--glow-accent) / 0.15));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -211,53 +267,51 @@
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
   overflow: hidden;
 }
 
-/* Left to right flight */
 @keyframes fly-ltr {
   0% {
-    transform: translateX(-80px) translateY(0px);
+    transform: translateX(-100px) translateY(0px) rotate(-8deg);
   }
 
   25% {
-    transform: translateX(25vw) translateY(var(--y-offset, -10px));
+    transform: translateX(25vw) translateY(var(--y-offset, -10px)) rotate(-5deg);
   }
 
   50% {
-    transform: translateX(50vw) translateY(calc(var(--y-offset, -10px) * -1));
+    transform: translateX(50vw) translateY(calc(var(--y-offset, -10px) * -1)) rotate(-8deg);
   }
 
   75% {
-    transform: translateX(75vw) translateY(var(--y-offset, -10px));
+    transform: translateX(75vw) translateY(var(--y-offset, -10px)) rotate(-5deg);
   }
 
   100% {
-    transform: translateX(calc(100vw + 80px)) translateY(0px);
+    transform: translateX(calc(100vw + 100px)) translateY(0px) rotate(-8deg);
   }
 }
 
-/* Right to left flight */
 @keyframes fly-rtl {
   0% {
-    transform: translateX(calc(100vw + 80px)) translateY(0px);
+    transform: translateX(calc(100vw + 100px)) translateY(0px) rotate(188deg);
   }
 
   25% {
-    transform: translateX(75vw) translateY(var(--y-offset, 10px));
+    transform: translateX(75vw) translateY(var(--y-offset, 10px)) rotate(185deg);
   }
 
   50% {
-    transform: translateX(50vw) translateY(calc(var(--y-offset, 10px) * -1));
+    transform: translateX(50vw) translateY(calc(var(--y-offset, 10px) * -1)) rotate(188deg);
   }
 
   75% {
-    transform: translateX(25vw) translateY(var(--y-offset, 10px));
+    transform: translateX(25vw) translateY(var(--y-offset, 10px)) rotate(185deg);
   }
 
   100% {
-    transform: translateX(-80px) translateY(0px);
+    transform: translateX(-100px) translateY(0px) rotate(188deg);
   }
 }
 
@@ -266,6 +320,7 @@
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   will-change: transform;
+  filter: drop-shadow(0 0 6px hsl(var(--glow-primary) / 0.15));
 }
 
 .flying-plane.ltr {
@@ -278,7 +333,17 @@
   right: 0;
 }
 
-/* Contrail / vapor trail */
+/* Contrail */
+.flying-contrail {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--glow-primary) / 0.25), transparent);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+  filter: blur(1px);
+}
+
 @keyframes contrail-ltr {
   0% {
     left: -100px;
@@ -287,13 +352,13 @@
   }
 
   10% {
-    opacity: 1;
-    width: 60px;
+    opacity: 0.6;
+    width: 80px;
   }
 
   90% {
-    opacity: 0.5;
-    width: 80px;
+    opacity: 0.3;
+    width: 100px;
   }
 
   100% {
@@ -311,13 +376,13 @@
   }
 
   10% {
-    opacity: 1;
-    width: 60px;
+    opacity: 0.6;
+    width: 80px;
   }
 
   90% {
-    opacity: 0.5;
-    width: 80px;
+    opacity: 0.3;
+    width: 100px;
   }
 
   100% {
@@ -325,16 +390,6 @@
     width: 0;
     opacity: 0;
   }
-}
-
-.flying-contrail {
-  position: absolute;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, hsl(var(--glow-primary) / 0.3), transparent);
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  will-change: transform;
-  filter: blur(1px);
 }
 
 .flying-contrail.ltr {
@@ -346,7 +401,7 @@
 }
 
 /* ============================================
-   AURORA / COLORFUL BACKGROUND
+   AURORA BACKGROUND
    ============================================ */
 .aurora-bg {
   position: fixed;
@@ -361,6 +416,7 @@
   border-radius: 50%;
   filter: blur(80px);
   will-change: transform;
+  transition: background 0.8s ease;
 }
 
 @keyframes aurora-1 {
@@ -412,7 +468,7 @@
 }
 
 /* ============================================
-   PARTICLE SPARKLE
+   SPARKLE
    ============================================ */
 @keyframes sparkle {
 
@@ -439,68 +495,20 @@
 }
 
 /* ============================================
-   ENHANCED SCROLLBAR
+   KEYFRAMES
    ============================================ */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
+@keyframes gradient-shift {
 
-::-webkit-scrollbar-track {
-  background: hsl(var(--background));
-}
-
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--border));
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary) / 0.5);
-}
-
-/* ============================================
-   SELECTION STYLES
-   ============================================ */
-::selection {
-  background: hsl(var(--primary) / 0.3);
-  color: hsl(var(--foreground));
-}
-
-/* ============================================
-   LOADING SKELETON SHIMMER
-   ============================================ */
-@keyframes skeleton-shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-
+  0%,
   100% {
-    background-position: 200% 0;
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
   }
 }
 
-.skeleton-shimmer {
-  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted) / 0.5) 50%, hsl(var(--muted)) 75%);
-  background-size: 200% 100%;
-  animation: skeleton-shimmer 1.5s ease-in-out infinite;
-}
-
-/* ============================================
-   HOVER LIFT TRANSITION
-   ============================================ */
-.hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px hsl(var(--glow-primary) / 0.15);
-}
-
-/* ============================================
-   PULSE RING
-   ============================================ */
 @keyframes pulse-ring {
   0% {
     transform: scale(0.8);
@@ -523,14 +531,76 @@
 }
 
 /* ============================================
-   GRADIENT BORDER ANIMATION
+   SCROLLBAR
    ============================================ */
-@keyframes border-rotate {
-  0% {
-    --border-angle: 0deg;
-  }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
 
-  100% {
-    --border-angle: 360deg;
-  }
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+::selection {
+  background: hsl(var(--primary) / 0.3);
+  color: hsl(var(--foreground));
+}
+
+/* ============================================
+   HOVER LIFT
+   ============================================ */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px hsl(var(--glow-primary) / 0.12);
+}
+
+/* ============================================
+   LIGHT THEME OVERRIDES
+   ============================================ */
+.light .premium-card {
+  background: hsl(var(--card) / 0.85);
+  box-shadow: 0 1px 3px hsl(220 25% 15% / 0.06), 0 4px 16px hsl(220 25% 15% / 0.04);
+}
+
+.light .premium-card:hover {
+  box-shadow: 0 4px 20px hsl(var(--glow-primary) / 0.1), 0 8px 32px hsl(220 25% 15% / 0.06);
+}
+
+.light .glass-strong {
+  background: hsl(var(--card) / 0.92);
+  box-shadow: 0 1px 3px hsl(220 25% 15% / 0.04);
+}
+
+.light .grid-bg {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, hsl(var(--glow-primary) / 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, hsl(var(--glow-accent) / 0.04) 0%, transparent 50%),
+    linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+}
+
+.light .flying-plane {
+  filter: drop-shadow(0 0 4px hsl(var(--glow-primary) / 0.2));
+}
+
+.light .noise-bg::before {
+  opacity: 0.008;
 }

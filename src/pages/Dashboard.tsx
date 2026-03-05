@@ -3,6 +3,7 @@ import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAppData } from "@/contexts/AppContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Plane, FileText, ClipboardCheck, Activity, TrendingUp, ArrowUpRight } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts";
 import { healthChartData, inspectionActivityData } from "@/data/mockData";
@@ -10,11 +11,18 @@ import { healthChartData, inspectionActivityData } from "@/data/mockData";
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 const item = { hidden: { opacity: 0, y: 20, scale: 0.95 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring" as const, stiffness: 300, damping: 24 } } };
 
-const gradientBgs = [
-  "bg-gradient-to-br from-purple-500 via-violet-600 to-indigo-700",
-  "bg-gradient-to-br from-cyan-500 via-blue-500 to-blue-600",
+const darkGradients = [
+  "bg-gradient-to-br from-amber-500 via-yellow-600 to-amber-700",
+  "bg-gradient-to-br from-slate-400 via-gray-400 to-slate-500",
   "bg-gradient-to-br from-emerald-500 via-green-500 to-teal-600",
-  "bg-gradient-to-br from-amber-500 via-orange-500 to-red-500",
+  "bg-gradient-to-br from-orange-500 via-amber-600 to-yellow-600",
+];
+
+const lightGradients = [
+  "bg-gradient-to-br from-emerald-500 via-teal-500 to-green-600",
+  "bg-gradient-to-br from-amber-500 via-orange-500 to-red-400",
+  "bg-gradient-to-br from-teal-500 via-cyan-500 to-blue-500",
+  "bg-gradient-to-br from-rose-500 via-pink-500 to-fuchsia-500",
 ];
 
 const StatCard = ({ title, value, change, icon: Icon, gradient, index }: { title: string; value: string | number; change?: string; icon: any; gradient: string; index: number }) => (
@@ -51,6 +59,23 @@ const StatCard = ({ title, value, change, icon: Icon, gradient, index }: { title
 const Dashboard = () => {
   const { aircraft, documents, reports } = useAppData();
   const { user } = useAuth();
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const gradients = isDark ? darkGradients : lightGradients;
+
+  const chartColors = {
+    grid: isDark ? "hsl(220 12% 16%)" : "hsl(40 15% 88%)",
+    text: isDark ? "hsl(220 8% 50%)" : "hsl(220 10% 45%)",
+    tooltip: {
+      bg: isDark ? "hsl(220 14% 11%)" : "hsl(0 0% 100%)",
+      border: isDark ? "hsl(220 12% 22%)" : "hsl(40 15% 85%)",
+      text: isDark ? "hsl(40 10% 90%)" : "hsl(220 25% 15%)",
+    },
+    bar1Start: isDark ? "#C9A84C" : "#2D9C6F",
+    bar1End: isDark ? "#8B6914" : "#1A6B4A",
+    bar2: isDark ? "hsl(220 12% 18%)" : "hsl(40 15% 90%)",
+    line: isDark ? "#C9A84C" : "#C0703A",
+  };
 
   return (
     <DashboardLayout>
@@ -63,34 +88,34 @@ const Dashboard = () => {
         </motion.div>
 
         <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          <StatCard title="Total Aircraft" value={aircraft.length} change="+1" icon={Plane} gradient={gradientBgs[0]} index={0} />
-          <StatCard title="Documents" value={documents.length} icon={FileText} gradient={gradientBgs[1]} index={1} />
-          <StatCard title="Inspections" value={reports.length} change="+2" icon={ClipboardCheck} gradient={gradientBgs[2]} index={2} />
-          <StatCard title="System Status" value="Online" icon={Activity} gradient={gradientBgs[3]} index={3} />
+          <StatCard title="Total Aircraft" value={aircraft.length} change="+1" icon={Plane} gradient={gradients[0]} index={0} />
+          <StatCard title="Documents" value={documents.length} icon={FileText} gradient={gradients[1]} index={1} />
+          <StatCard title="Inspections" value={reports.length} change="+2" icon={ClipboardCheck} gradient={gradients[2]} index={2} />
+          <StatCard title="System Status" value="Online" icon={Activity} gradient={gradients[3]} index={3} />
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>
             <div className="premium-card hover-lift">
-              <CardHeader><CardTitle className="font-heading text-lg flex items-center gap-2"><TrendingUp className="h-4 w-4 text-purple-400" />Aircraft Health Status</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="font-heading text-lg flex items-center gap-2"><TrendingUp className="h-4 w-4 text-primary" />Aircraft Health Status</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
                   <BarChart data={healthChartData} barGap={8}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(230 20% 16%)" vertical={false} />
-                    <XAxis dataKey="name" tick={{ fill: "hsl(225 15% 50%)", fontSize: 12, fontFamily: "Space Grotesk" }} axisLine={false} tickLine={false} />
-                    <YAxis tick={{ fill: "hsl(225 15% 50%)", fontSize: 12 }} axisLine={false} tickLine={false} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} vertical={false} />
+                    <XAxis dataKey="name" tick={{ fill: chartColors.text, fontSize: 12, fontFamily: "Space Grotesk" }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill: chartColors.text, fontSize: 12 }} axisLine={false} tickLine={false} />
                     <Tooltip
-                      contentStyle={{ background: "hsl(230 25% 10%)", border: "1px solid hsl(230 20% 20%)", borderRadius: 12, color: "hsl(220 20% 95%)", fontFamily: "Space Grotesk" }}
-                      cursor={{ fill: "hsl(250 85% 65% / 0.05)" }}
+                      contentStyle={{ background: chartColors.tooltip.bg, border: `1px solid ${chartColors.tooltip.border}`, borderRadius: 12, color: chartColors.tooltip.text, fontFamily: "Space Grotesk" }}
+                      cursor={{ fill: "hsl(var(--primary) / 0.05)" }}
                     />
                     <defs>
-                      <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="hsl(250 85% 65%)" />
-                        <stop offset="100%" stopColor="hsl(200 80% 55%)" />
+                      <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor={chartColors.bar1Start} />
+                        <stop offset="100%" stopColor={chartColors.bar1End} />
                       </linearGradient>
                     </defs>
-                    <Bar dataKey="health" fill="url(#barGradient)" radius={[8, 8, 0, 0]} />
-                    <Bar dataKey="target" fill="hsl(230 20% 18%)" radius={[8, 8, 0, 0]} />
+                    <Bar dataKey="health" fill="url(#barGrad)" radius={[8, 8, 0, 0]} />
+                    <Bar dataKey="target" fill={chartColors.bar2} radius={[8, 8, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -99,24 +124,23 @@ const Dashboard = () => {
 
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}>
             <div className="premium-card hover-lift">
-              <CardHeader><CardTitle className="font-heading text-lg flex items-center gap-2"><Activity className="h-4 w-4 text-cyan-400" />Inspection Activity</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="font-heading text-lg flex items-center gap-2"><Activity className="h-4 w-4 text-accent" />Inspection Activity</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
                   <AreaChart data={inspectionActivityData}>
                     <defs>
-                      <linearGradient id="inspGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="hsl(200 80% 55%)" stopOpacity={0.4} />
-                        <stop offset="50%" stopColor="hsl(250 85% 65%)" stopOpacity={0.15} />
-                        <stop offset="100%" stopColor="hsl(200 80% 55%)" stopOpacity={0} />
+                      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor={chartColors.line} stopOpacity={0.35} />
+                        <stop offset="100%" stopColor={chartColors.line} stopOpacity={0} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(230 20% 16%)" vertical={false} />
-                    <XAxis dataKey="month" tick={{ fill: "hsl(225 15% 50%)", fontSize: 12, fontFamily: "Space Grotesk" }} axisLine={false} tickLine={false} />
-                    <YAxis tick={{ fill: "hsl(225 15% 50%)", fontSize: 12 }} axisLine={false} tickLine={false} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} vertical={false} />
+                    <XAxis dataKey="month" tick={{ fill: chartColors.text, fontSize: 12, fontFamily: "Space Grotesk" }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill: chartColors.text, fontSize: 12 }} axisLine={false} tickLine={false} />
                     <Tooltip
-                      contentStyle={{ background: "hsl(230 25% 10%)", border: "1px solid hsl(230 20% 20%)", borderRadius: 12, color: "hsl(220 20% 95%)", fontFamily: "Space Grotesk" }}
+                      contentStyle={{ background: chartColors.tooltip.bg, border: `1px solid ${chartColors.tooltip.border}`, borderRadius: 12, color: chartColors.tooltip.text, fontFamily: "Space Grotesk" }}
                     />
-                    <Area type="monotone" dataKey="inspections" stroke="hsl(200 80% 55%)" strokeWidth={2.5} fill="url(#inspGradient)" dot={{ fill: "hsl(200 80% 55%)", r: 4, strokeWidth: 0 }} activeDot={{ r: 6, strokeWidth: 2, stroke: "hsl(200 80% 55%)" }} />
+                    <Area type="monotone" dataKey="inspections" stroke={chartColors.line} strokeWidth={2.5} fill="url(#areaGrad)" dot={{ fill: chartColors.line, r: 4, strokeWidth: 0 }} activeDot={{ r: 6, strokeWidth: 2, stroke: chartColors.line }} />
                   </AreaChart>
                 </ResponsiveContainer>
               </CardContent>
