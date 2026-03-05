@@ -1,6 +1,6 @@
 import { LayoutDashboard, Plane, Upload, ClipboardCheck, MessageSquare, FileText, LogOut } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
@@ -9,9 +9,9 @@ import {
 
 const navItems = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
-  { title: "Aircraft Management", url: "/aircraft", icon: Plane },
-  { title: "Upload Documents", url: "/documents", icon: Upload },
-  { title: "Pre-Flight Check", url: "/preflight", icon: ClipboardCheck },
+  { title: "Aircraft", url: "/aircraft", icon: Plane },
+  { title: "Documents", url: "/documents", icon: Upload },
+  { title: "Pre-Flight", url: "/preflight", icon: ClipboardCheck },
   { title: "AI Assistant", url: "/assistant", icon: MessageSquare },
   { title: "Reports", url: "/reports", icon: FileText },
 ];
@@ -19,18 +19,28 @@ const navItems = [
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
-  const location = useLocation();
   const navigate = useNavigate();
   const { logout } = useAuth();
 
   const handleLogout = () => { logout(); navigate("/"); };
 
   return (
-    <Sidebar collapsible="icon" className="border-r border-border bg-sidebar">
+    <Sidebar collapsible="icon" className="border-r border-border/50 bg-sidebar">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="font-display text-primary text-xs tracking-widest px-3 py-4">
-            {!collapsed && "AEROGUARDIAN"}
+          <SidebarGroupLabel className="px-3 py-5">
+            {!collapsed ? (
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
+                  <Plane className="h-4 w-4 text-primary-foreground" />
+                </div>
+                <span className="font-display text-xs font-bold gradient-text tracking-wide">AEROGUARDIAN</span>
+              </div>
+            ) : (
+              <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center mx-auto">
+                <Plane className="h-4 w-4 text-primary-foreground" />
+              </div>
+            )}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -40,10 +50,10 @@ export function AppSidebar() {
                     <NavLink
                       to={item.url}
                       end
-                      className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sidebar-foreground hover:bg-sidebar-accent transition-colors"
-                      activeClassName="bg-sidebar-accent text-primary font-medium glow-cyan-sm"
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground transition-all duration-200"
+                      activeClassName="bg-primary/10 text-primary font-medium glow-primary-sm border border-primary/20"
                     >
-                      <item.icon className="h-5 w-5 shrink-0" />
+                      <item.icon className="h-4 w-4 shrink-0" />
                       {!collapsed && <span className="font-heading text-sm">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
@@ -56,8 +66,8 @@ export function AppSidebar() {
       <SidebarFooter className="p-2">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton onClick={handleLogout} className="flex items-center gap-3 px-3 py-2.5 text-destructive hover:bg-destructive/10 rounded-md cursor-pointer">
-              <LogOut className="h-5 w-5 shrink-0" />
+            <SidebarMenuButton onClick={handleLogout} className="flex items-center gap-3 px-3 py-2.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg cursor-pointer transition-all duration-200">
+              <LogOut className="h-4 w-4 shrink-0" />
               {!collapsed && <span className="font-heading text-sm">Logout</span>}
             </SidebarMenuButton>
           </SidebarMenuItem>
