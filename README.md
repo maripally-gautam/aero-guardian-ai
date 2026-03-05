@@ -1,73 +1,82 @@
-# Welcome to your Lovable project
+# ✈️ AeroGuardian AI
 
-## Project info
+**AI-Powered Aircraft Maintenance Intelligence Platform**
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+AeroGuardian AI is a cutting-edge aircraft maintenance assistant that leverages RAG (Retrieval-Augmented Generation) technology to provide intelligent fault detection, real-time diagnostics, and predictive maintenance recommendations.
 
-## How can I edit this code?
+## 🚀 Features
 
-There are several ways of editing your application.
+- **RAG-Powered AI Assistant** — Chat with documents using AI to get instant maintenance guidance
+- **Pre-Flight Health Check** — Run AI-assisted diagnostics with real-time fault detection
+- **Aircraft Fleet Management** — Track and manage your entire fleet in one dashboard
+- **Document Processing Pipeline** — Upload maintenance manuals with automatic text extraction, chunking, and embedding
+- **Inspection Reports** — Comprehensive historical inspection data with status tracking
+- **Google Sign-In** — Secure authentication powered by Firebase
 
-**Use Lovable**
+## 🛠️ Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- **Frontend:** React 18, TypeScript, TailwindCSS, Framer Motion
+- **UI Components:** Radix UI, shadcn/ui
+- **Charts:** Recharts
+- **Authentication:** Firebase Auth (Google Sign-In)
+- **Build Tool:** Vite
+- **State Management:** React Context API
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📦 Getting Started
 
-**Use your preferred IDE**
+### Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Node.js 18+ and npm
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Installation
 
-Follow these steps:
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd aero-guardian-ai
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Install dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Set up environment variables
+cp .env.example .env
+# Fill in your Firebase config values
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Environment Variables
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Create a `.env` file in the root directory with your Firebase configuration:
 
-**Use GitHub Codespaces**
+```env
+VITE_FIREBASE_API_KEY=your-api-key
+VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your-project-id
+VITE_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+VITE_FIREBASE_APP_ID=your-app-id
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📁 Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/       # Reusable UI components
+│   ├── layout/       # Dashboard layout, sidebar
+│   └── ui/           # shadcn/ui components
+├── contexts/         # React context providers
+├── data/             # Mock data and types
+├── hooks/            # Custom React hooks
+├── lib/              # Utility functions + Firebase config
+└── pages/            # Application pages
+```
 
-This project is built with:
+## 🧑‍💻 Team
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Built with ❤️ by the AeroGuardian AI Team
 
-## How can I deploy this project?
+## 📄 License
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+This project is for educational/hackathon purposes.
