@@ -3,7 +3,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import { useAuth } from "@/contexts/AuthContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import FlyingAirplanes from "@/components/FlyingAirplanes";
 import AuroraBackground from "@/components/AuroraBackground";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -29,13 +29,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              {/* Notification Bell */}
-              <button className="relative p-2 rounded-lg hover:bg-secondary/50 transition-colors text-muted-foreground hover:text-foreground">
-                <Bell className="h-4 w-4" />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary animate-pulse" />
-              </button>
-
-              {/* Theme Toggle - between bell and avatar */}
+              {/* Theme Toggle */}
               <ThemeToggle />
 
               {/* User Avatar */}

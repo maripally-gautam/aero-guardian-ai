@@ -28,33 +28,33 @@ export function AppSidebar() {
     <Sidebar collapsible="icon" className="border-r border-border/50 bg-sidebar">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="px-3 py-5">
+          <SidebarGroupLabel className="px-4 py-7 mb-4">
             {!collapsed ? (
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
-                  <Plane className="h-4 w-4 text-primary-foreground" />
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
+                  <Plane className="h-5 w-5 text-primary-foreground" />
                 </div>
-                <span className="font-display text-xs font-bold gradient-text tracking-wide">AEROGUARDIAN</span>
+                <span className="font-display text-sm font-bold gradient-text tracking-wide">AEROGUARDIAN</span>
               </div>
             ) : (
-              <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center mx-auto">
-                <Plane className="h-4 w-4 text-primary-foreground" />
+              <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center mx-auto">
+                <Plane className="h-5 w-5 text-primary-foreground" />
               </div>
             )}
           </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
+          <SidebarGroupContent className="px-2">
+            <SidebarMenu className="space-y-2">
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink
                       to={item.url}
                       end
-                      className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground transition-all duration-200"
+                      className="flex items-center gap-4 px-4 py-3.5 rounded-xl text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground transition-all duration-200"
                       activeClassName="bg-primary/10 text-primary font-medium glow-primary-sm border border-primary/20"
                     >
-                      <item.icon className="h-4 w-4 shrink-0" />
-                      {!collapsed && <span className="font-heading text-sm">{item.title}</span>}
+                      <item.icon className="h-5 w-5 shrink-0" />
+                      {!collapsed && <span className="font-heading text-[0.9rem]">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -63,12 +63,12 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="p-2">
+      <SidebarFooter className="p-4">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton onClick={handleLogout} className="flex items-center gap-3 px-3 py-2.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg cursor-pointer transition-all duration-200">
-              <LogOut className="h-4 w-4 shrink-0" />
-              {!collapsed && <span className="font-heading text-sm">Logout</span>}
+            <SidebarMenuButton onClick={handleLogout} className="flex items-center gap-4 px-4 py-3.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-xl cursor-pointer transition-all duration-200">
+              <LogOut className="h-5 w-5 shrink-0" />
+              {!collapsed && <span className="font-heading text-[0.9rem]">Logout</span>}
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
